@@ -30,8 +30,13 @@ obj.gt = true
 
 // console.log(obj);
 
+type myType ={
+    name: string,
+    age: number, 
+    gt: boolean
+}
 
-let people: { name: string,age: number, gt: boolean}[] =[
+let people: myType[] =[
     {
         name: "chinhpd5",
         age: 18,
@@ -50,8 +55,7 @@ let people: { name: string,age: number, gt: boolean}[] =[
 
 ]
 
-function showData(data: { name: string,age: number, gt: boolean}[])
-:string{
+function showData(data: myType[]):string{
     return data.map(item=>{
         return `
             <div>
@@ -62,7 +66,20 @@ function showData(data: { name: string,age: number, gt: boolean}[])
         `
     }).join('');
     
+}  
+
+function addData(data: myType):void{
+    people.push(data);
 }
+
+let peo: myType={
+    name: "long",
+    age: 8,
+    gt: false
+}
+
+addData(peo);
+
 
 console.log(showData(people));
 

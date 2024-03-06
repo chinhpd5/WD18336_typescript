@@ -16,7 +16,6 @@ var obj = {
     gt: false
 };
 obj.gt = true;
-// console.log(obj);
 var people = [
     {
         name: "chinhpd5",
@@ -39,4 +38,13 @@ function showData(data) {
         return "\n            <div>\n                <h3>".concat(item.name, "</h3>\n                <h4>").concat(item.age, "</h4>\n                <p>").concat((item.gt ? 'Nam' : 'Nữ'), "</p>\n            </div>\n        ");
     }).join('');
 }
+function addData(data) {
+    people.push(data);
+}
+var peo = {
+    name: "long",
+    age: 8,
+    gt: false
+};
+addData(peo);
 console.log(showData(people));
