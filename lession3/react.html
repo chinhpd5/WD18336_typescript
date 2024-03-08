@@ -6,6 +6,7 @@
     <title>React</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
     <div class="app">
@@ -16,14 +17,37 @@
             <li>Html </li>
             <li>Css</li>
         </ul> -->
-    <script>
-        const h1React = React.createElement('h1',{
-            className: 'heading1',
-            title: 'xin chào'
-        },'hello')
-        // console.log((h1React));
+    <script type="text/babel">
+        const name ="chinhpd5";
+        // alert(); 
+
+
+        // class -> className
+        //for -> forHtml
+        const h1React = ( 
+            <h1 className='heading' title="xin chào">{name}</h1>
+        )
+
         const app = document.querySelector('.app');
         ReactDOM.createRoot(app).render(h1React);
+
+
+        // const h1React = React.createElement('h1',{
+        //     className: 'heading1',
+        //     title: 'xin chào'
+        // },'hello')
+
+
+        // const ulReact = React.createElement('ul',{
+        //         className: "list",
+        //         style: {
+        //             color: "blue"
+        //         }
+        //     },
+        //     React.createElement('li',null,'Html'),
+        //     React.createElement('li',null,'css')
+        // )
+        
 
 
 
