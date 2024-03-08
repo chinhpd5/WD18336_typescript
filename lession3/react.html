@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+</head>
+<body>
+    <div class="app">
+        <!-- <h1 class="heading1" title="xin chào">Hello</h1> -->
+        
+    </div>
+        <!-- <ul>  
+            <li>Html </li>
+            <li>Css</li>
+        </ul> -->
+    <script>
+        const h1React = React.createElement('h1',{
+            className: 'heading1',
+            title: 'xin chào'
+        },'hello')
+        // console.log((h1React));
+        const app = document.querySelector('.app');
+        ReactDOM.createRoot(app).render(h1React);
+
+
+
+        // const h1Dom = document.createElement('h1');
+        // h1Dom.className ='heading1';
+        // h1Dom.title ='xin chào';
+        // h1Dom.textContent ='Hello';
+        // console.log(h1Dom);
+        // const app = document.querySelector('.app');
+
+        // const ulDom = document.createElement('ul');
+        // const liDom1 = document.createElement('li');
+        // liDom1.innerText ='html';
+        // const liDom2 = document.createElement('li');
+        // liDom2.innerText ='css'
+
+        // ulDom.appendChild(liDom1);
+        // ulDom.appendChild(liDom2);
+        // app.appendChild(ulDom);
+
+    </script>
+</body>
+</html>
