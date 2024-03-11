@@ -23,16 +23,27 @@
 
 
         // class -> className
-        //for -> forHtml
+        // for -> htmlFor
         const h1React = ( 
             <h1 className='heading' title="xin chào">{name}</h1>
         )
+        const arrCourses = ["Html", "Css","Js","C++"];
+
+        const ulJSX =(
+            <ul id="ulElement" className="ulReact" style={{color: "red", fontSize: '20px'}}>
+            {
+                arrCourses.map((item,index)=>{
+                    return ( <li key={index} >{item}</li> )
+               })
+            }
+            </ul>
+        )
 
         const app = document.querySelector('.app');
-        ReactDOM.createRoot(app).render(h1React);
+        ReactDOM.createRoot(app).render(ulJSX);
 
 
-        // const h1React = React.createElement('h1',{
+        // const h1React1 = React.createElement('h1',{
         //     className: 'heading1',
         //     title: 'xin chào'
         // },'hello')
