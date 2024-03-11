@@ -13,13 +13,31 @@ function Footer(){
   return(<footer>Footer</footer>)
 }
 
+type ProductType={
+  id: number;
+  name: string;
+  price: string;
+  sale: boolean;
+  description: string;
+}
+
+function ShowProduct(props: ProductType):JSX.Element{
+  console.log(props);
+  return (
+    <div>
+      <h1>{props.name}</h1>
+      <h3>{props.price}</h3>
+      <p>{(props.sale ? "Đang sale": "")}</p>
+      <p>{props.description}</p>
+    </div>
+  )
+}
+
 function App() {
   return (
     <>
-      <Header/>
-      <Content></Content>
-      <Footer/>
-      
+      <ShowProduct id={1} name="Product 2" 
+      price="400.000" sale={true} description="Mô tả"/>
     </>
   );
 }
