@@ -1,37 +1,6 @@
 import "./App.css";
-
-function Header(){
-  return (
-    <header>Header new</header>
-  )
-}
-function Content(){
-  return (<main>Nội dung</main>)
-}
-
-function Footer(){
-  return(<footer>Footer</footer>)
-}
-
-type ProductType={
-  id: number;
-  name: string;
-  price: string;
-  sale: boolean;
-  description: string;
-}
-
-function ShowProduct(props: ProductType):JSX.Element{
-  console.log(props);
-  return (
-    <div>
-      <h1>{props.name}</h1>
-      <h3>{props.price}</h3>
-      <p>{(props.sale ? "Đang sale": "")}</p>
-      <p>{props.description}</p>
-    </div>
-  )
-}
+import ShowProduct from "./components/ShowProduct";
+import ProductType from "./interfaces/product";
 
 function App() {
 
@@ -69,8 +38,13 @@ function App() {
 
   return (
     <>
-      <ShowProduct id={1} name="Product 2" 
-      price="400.000" sale={true} description="Mô tả"/>
+      {
+        arrProduct.map(product=>{
+          return (<ShowProduct key={product.id} id={product.id} name={product.name} price={product.price} 
+          sale={product.sale} description={product.description}/>)
+        })
+      }
+
     </>
   );
 }
