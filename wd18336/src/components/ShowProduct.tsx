@@ -1,7 +1,7 @@
 import ProductType from '../interfaces/product.ts';
 
 function ShowProduct(props: ProductType):JSX.Element{
-    console.log(props);
+    // console.log(props);
     return (
       <div>
         <h1>{props.name}</h1>
@@ -10,6 +10,6 @@ function ShowProduct(props: ProductType):JSX.Element{
         <p>{props.description}</p>
       </div>
     )
-  }
+}
 
 export default ShowProduct;
