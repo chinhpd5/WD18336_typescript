@@ -40,12 +40,34 @@ function App() {
     })
     
   }
+
+  function handleAdd(data: IProduct){
+    //thêm mới sản phẩm tại đây
+    fetch(`http://localhost:3000/product/`,{
+      method: 'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res=>{
+      return res.json();
+    })
+    .then((newData)=>{
+      setProduct([...product,newData])
+    })
+    .catch(()=>{
+      console.log("có lỗi");
+      
+    })
+    
+  }
   //npm i react-router-dom
   return (
     <Routes>
       <Route path="/" element={ <h1>Trang chủ</h1> }/>
       <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
-      <Route path="product/add" element={<ProductAdd />} />
+      <Route path="product/add" element={<ProductAdd onAdd={handleAdd}/>} />
 
 
     </Routes>
