@@ -18,9 +18,28 @@ function App() {
       })
   },[])
 
+  function handleDelete(id: string){
+    //call api xóa trong json server
+    // console.log("nhận: ", id);
+    fetch(`http://localhost:3000/product/${id}`,{
+      method:"DELETE",
+      headers:{
+        'Content-Type':'application/json'
+      }
+    })
+    .then(()=>{
+        setProduct(product.filter((item)=> item.id != id ));
+    })
+    .catch(()=>{
+      console.log("có lỗi khi xóa");
+      
+    })
+    
+  }
+
   return (
     <div>
-      <ProductList listProduct={product} />
+      <ProductList listProduct={product} onDelete={handleDelete}/>
     </div>
   )
 }
