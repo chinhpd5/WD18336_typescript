@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import IProduct from "./interfaces/IProduct";
 import ProductList from "./components/ProductList";
+import { Route , Routes } from "react-router-dom";
+import ProductAdd from "./components/ProductAdd";
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
       }
     })
     .then(()=>{
+        //xóa sản phẩm có id trong mảng product
+        //sử dụng setProduct để gán lại giá trị mới cho product và render lại giao diện
         setProduct(product.filter((item)=> item.id != id ));
     })
     .catch(()=>{
@@ -36,11 +40,15 @@ function App() {
     })
     
   }
-
+  //npm i react-router-dom
   return (
-    <div>
-      <ProductList listProduct={product} onDelete={handleDelete}/>
-    </div>
+    <Routes>
+      <Route path="/" element={ <h1>Trang chủ</h1> }/>
+      <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
+      <Route path="product/add" element={<ProductAdd />} />
+
+
+    </Routes>
   )
 }
 
