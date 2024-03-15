@@ -41,19 +41,22 @@ function App() {
     
   }
 
+  //call API thêm mới sản phẩm
   function handleAdd(data: IProduct){
-    //thêm mới sản phẩm tại đây
+    // data là dữ liệu nhận được khi form submit gửi từ ProductAdd
     fetch(`http://localhost:3000/product/`,{
-      method: 'POST',
+      method: 'POST', 
       headers:{
         'Content-Type':'application/json'
       },
       body: JSON.stringify(data)
     })
     .then(res=>{
+      // res là dữ liệu sản phẩm nhận lại sau khi thêm thành công (có id của sản phẩm)
       return res.json();
     })
     .then((newData)=>{
+      // thêm product mới vào cuối mảng
       setProduct([...product,newData])
     })
     .catch(()=>{
