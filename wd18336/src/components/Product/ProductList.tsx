@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import IProduct from "../interfaces/IProduct";
+import IProduct from "../../interfaces/IProduct";
 
 type productType={
   listProduct: IProduct[],

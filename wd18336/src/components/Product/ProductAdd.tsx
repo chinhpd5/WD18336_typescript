@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import IProduct from "../interfaces/IProduct";
+import IProduct from "../../interfaces/IProduct";
 import { useNavigate } from "react-router-dom";
 // kiểu dữ liệu của prop
 type PropAdd={

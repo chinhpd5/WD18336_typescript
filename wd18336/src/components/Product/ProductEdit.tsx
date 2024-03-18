@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import IProduct from "../interfaces/IProduct";
+import IProduct from "../../interfaces/IProduct";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 

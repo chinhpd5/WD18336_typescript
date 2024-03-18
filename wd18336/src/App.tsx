@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import IProduct from "./interfaces/IProduct";
-import ProductList from "./components/ProductList";
+import ProductList from "./components/Product/ProductList";
 import { Route , Routes, json } from "react-router-dom";
-import ProductAdd from "./components/ProductAdd";
-import ProductEdit from "./components/ProductEdit";
+import ProductAdd from "./components/Product/ProductAdd";
+import ProductEdit from "./components/Product/ProductEdit";
 
 
 function App() {
@@ -96,9 +96,23 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={ <h1>Trang chủ</h1> }/>
-      <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
+      
+      <Route path="product">
+          {/* url: product */}
+          <Route path="" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
+          {/* url: product/add */}
+          <Route path="add" element={<ProductAdd onAdd={handleAdd}/>} />
+          {/* url: product/edit/:id */}
+          <Route path="edit/:id" element={<ProductEdit onEdit={handleUpdate} />} />
+      </Route>
+
+      <Route path="user" >
+
+      </Route>
+
+      {/* <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
       <Route path="product/add" element={<ProductAdd onAdd={handleAdd}/>} />
-      <Route path="product/edit/:id" element={<ProductEdit onEdit={handleUpdate} />}/>
+      <Route path="product/edit/:id" element={<ProductEdit onEdit={handleUpdate} />}/> */}
     </Routes>
   )
 }
