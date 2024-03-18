@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import IProduct from "./interfaces/IProduct";
 import ProductList from "./components/ProductList";
-import { Route , Routes } from "react-router-dom";
+import { Route , Routes, json } from "react-router-dom";
 import ProductAdd from "./components/ProductAdd";
+import ProductEdit from "./components/ProductEdit";
 
 
 function App() {
@@ -65,14 +66,39 @@ function App() {
     })
     
   }
+
+  function handleUpdate(id: string, data: IProduct){
+    // console.log({id, data});
+    fetch(`http://localhost:3000/product/${id}`,{
+      method: "PUT",
+      headers: {
+        "Content-Type" : "Application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(data=>{
+      return data.json();
+    })
+    .then(data=>{
+      setProduct(product.map((item)=>{
+        if(item.id == id)
+          return data;
+        else
+          return item;
+      }))
+    })
+    .catch(()=>{
+      console.log("lỗi khi sửa dữ liệu");
+      
+    })
+  }
   //npm i react-router-dom
   return (
     <Routes>
       <Route path="/" element={ <h1>Trang chủ</h1> }/>
       <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
       <Route path="product/add" element={<ProductAdd onAdd={handleAdd}/>} />
-
-
+      <Route path="product/edit/:id" element={<ProductEdit onEdit={handleUpdate} />}/>
     </Routes>
   )
 }

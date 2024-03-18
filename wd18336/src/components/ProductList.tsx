@@ -18,7 +18,8 @@ function ProductList(prop: productType){
                   return (
                       <li key={product.id} >
                         {product.name} - {product.price}
-                        <button onClick={()=>{ prop.onDelete(product.id!) }} >Xóa</button>
+                        <Link className="btn btn-warning mx-3" to={`/product/edit/${product.id}`}>Sửa</Link>
+                        <button className="btn btn-danger" onClick={()=>{ prop.onDelete(product.id!) }} >Xóa</button>
                       </li>
                   )
           })}

@@ -1,14 +1,9 @@
 {
   "product": [
     {
-      "id": "1",
-      "name": "product 1",
-      "price": 100
-    },
-    {
       "id": "2",
-      "name": "product 2",
-      "price": 200
+      "name": "product new1",
+      "price": "10000"
     },
     {
       "id": "3",
@@ -34,11 +29,48 @@
       "id": "e5a0",
       "name": "xyz",
       "price": "123"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "firstName": "Terry",
+      "lastName": "Medhurst",
+      "age": 50,
+      "gender": "male",
+      "email": "atuny0@sohu.com"
     },
     {
-      "id": "184c",
-      "name": "chinh",
-      "price": "789"
+      "id": "2",
+      "firstName": "Adam",
+      "lastName": "Smit",
+      "age": 33,
+      "gender": "female",
+      "email": "Adam0@mail.com"
+    },
+    {
+      "id": "3",
+      "firstName": "Ryan",
+      "lastName": "Bowen",
+      "age": 76,
+      "gender": "male",
+      "email": "Bowen@sohu.com"
+    },
+    {
+      "id": "4",
+      "firstName": "Small",
+      "lastName": "John",
+      "age": 20,
+      "gender": "male",
+      "email": "John@sohu.com"
+    },
+    {
+      "id": "5",
+      "firstName": "Macon",
+      "lastName": "Karik",
+      "age": 28,
+      "gender": "female",
+      "email": "Karik@sohu.com"
     }
   ]
 }
