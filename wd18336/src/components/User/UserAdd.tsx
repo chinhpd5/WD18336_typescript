@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-type PropAdd={}
+type PropAdd={
+    onAdd: (data: Input) => void
+}
 type Input={
     fisrtName: string,
     lastName: string,
@@ -10,7 +13,7 @@ type Input={
 }
 
 function UserAdd(prop: PropAdd){
-
+    const naviagate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -20,7 +23,8 @@ function UserAdd(prop: PropAdd){
     console.log(errors);
 
     const onSubmit =(data: Input) => {
-
+        prop.onAdd(data);
+        naviagate("/user");
     }
     
     return (
@@ -81,7 +85,7 @@ function UserAdd(prop: PropAdd){
             {/* giới tính */}
             <div className="mb-3">
                 <label  className="form-label">Gender</label>
-                <input type="text" className="form-control" />
+                <input type="text" className="form-control" {...register("gender")} />
             </div>
             {/* email */}
             <div className="mb-3">

@@ -109,8 +109,29 @@ function App() {
   //User
 
   function handleDeleteUser(id: string){
+    
+  }
+
+  function handleAddUser(data: IUser){
+      if(data){
+        fetch('http://localhost:3000/users',{
+          method: "POST",
+          headers: {
+            "Content-Type": "Application/json"
+          },
+          body: JSON.stringify(data)
+        })
+        .then(res=> res.json())
+        .then(res=> setUserList([...userList,res]))
+        .catch(()=>{
+          console.log("thêm bị lỗi");
+          
+        })
+        
+      }
 
   }
+
   //npm i react-router-dom
   return (
     <Routes>
@@ -127,7 +148,7 @@ function App() {
 
       <Route path="user" >
         <Route path="" element={<UserList data={userList} onDelete={handleDeleteUser} />} />
-        <Route path="add" element={<UserAdd />} />
+        <Route path="add" element={<UserAdd onAdd={handleAddUser}/>} />
       </Route>
 
       {/* <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />

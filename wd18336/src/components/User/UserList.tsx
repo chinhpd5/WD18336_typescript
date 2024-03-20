@@ -31,7 +31,7 @@ function UserList({data,onDelete}: PropList){
                                 <td>{user.email}</td>
                                 <td>
                                     <Link className="btn btn-warning" to={`/user/edit/${user.id}`}>Sửa</Link>
-                                    <button className="btn btn-danger" onClick={()=>{onDelete(user.id)}}>Xóa</button>
+                                    <button className="btn btn-danger" onClick={()=>{onDelete(user.id!)}}>Xóa</button>
                                 </td>
                             </tr>
                         )
