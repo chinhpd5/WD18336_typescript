@@ -5,13 +5,14 @@ import ProductList from "./components/Product/ProductList";
 import { Route , Routes } from "react-router-dom";
 import ProductAdd from "./components/Product/ProductAdd";
 import ProductEdit from "./components/Product/ProductEdit";
-// import UserList from "./components/User/UserList";
-// import IUser from "./interfaces/IUser";
+import UserList from "./components/User/UserList";
+import IUser from "./interfaces/IUser";
+import UserAdd from "./components/User/UserAdd";
 
 
 function App() {
   const [product,setProduct] = useState<IProduct[]>([])
-  // const [userList,setUserList]= useState<IUser[]>([])
+  const [userList,setUserList]= useState<IUser[]>([])
 
   useEffect(()=>{
     // product
@@ -23,13 +24,13 @@ function App() {
         // console.log(data);
         setProduct(data)
       })
-    //user
-    // fetch(`http://localhost:3000/users`)
-    //   .then(res=>res.json())
-    //   .then(res => setUserList(res))
-    //   .catch(()=>{
-    //     console.log("lấy danh sách user lỗi");
-    //   })
+    // user
+    fetch(`http://localhost:3000/users`)
+      .then(res=>res.json())
+      .then(res => setUserList(res))
+      .catch(()=>{
+        console.log("lấy danh sách user lỗi");
+      })
 
   },[])
 
@@ -124,9 +125,10 @@ function App() {
           <Route path="edit/:id" element={<ProductEdit onEdit={handleUpdate} />} />
       </Route>
 
-      {/* <Route path="user" >
+      <Route path="user" >
         <Route path="" element={<UserList data={userList} onDelete={handleDeleteUser} />} />
-      </Route> */}
+        <Route path="add" element={<UserAdd />} />
+      </Route>
 
       {/* <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
       <Route path="product/add" element={<ProductAdd onAdd={handleAdd}/>} />
