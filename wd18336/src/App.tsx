@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import IProduct from "./interfaces/IProduct";
 import ProductList from "./components/Product/ProductList";
-import { Route , Routes, json } from "react-router-dom";
+import { Route , Routes } from "react-router-dom";
 import ProductAdd from "./components/Product/ProductAdd";
 import ProductEdit from "./components/Product/ProductEdit";
+// import UserList from "./components/User/UserList";
+// import IUser from "./interfaces/IUser";
 
 
 function App() {
   const [product,setProduct] = useState<IProduct[]>([])
+  // const [userList,setUserList]= useState<IUser[]>([])
 
   useEffect(()=>{
+    // product
     fetch(`http://localhost:3000/product`)
       .then(data=>{
         return data.json();
@@ -19,6 +23,14 @@ function App() {
         // console.log(data);
         setProduct(data)
       })
+    //user
+    // fetch(`http://localhost:3000/users`)
+    //   .then(res=>res.json())
+    //   .then(res => setUserList(res))
+    //   .catch(()=>{
+    //     console.log("lấy danh sách user lỗi");
+    //   })
+
   },[])
 
   function handleDelete(id: string){
@@ -92,6 +104,12 @@ function App() {
       
     })
   }
+
+  //User
+
+  function handleDeleteUser(id: string){
+
+  }
   //npm i react-router-dom
   return (
     <Routes>
@@ -106,9 +124,9 @@ function App() {
           <Route path="edit/:id" element={<ProductEdit onEdit={handleUpdate} />} />
       </Route>
 
-      <Route path="user" >
-
-      </Route>
+      {/* <Route path="user" >
+        <Route path="" element={<UserList data={userList} onDelete={handleDeleteUser} />} />
+      </Route> */}
 
       {/* <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
       <Route path="product/add" element={<ProductAdd onAdd={handleAdd}/>} />
