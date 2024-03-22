@@ -66,6 +66,11 @@ function Count(){
     const [count,dispatch] = useReducer(reducer,0)
     const [count2,dispatch2] = useReducer(reducer2,0)
     const [product,dispatchProduct] = useReducer(reducerProduct,initProduct);
+    //b1 tạo reducer
+    //b2 tạo giá trị khởi tạo initProduct
+    //b3 tạo function reducerProduct
+    //b4 tạo nút get data và xử làm handleGetData
+    //b5 xử lý logic {product.isLoading ? <h2>Loading ....</h2> : <ProductList listProduct={product.listProduct} onDelete={()=>{}} /> }
 
     function handleGetData(){
         
