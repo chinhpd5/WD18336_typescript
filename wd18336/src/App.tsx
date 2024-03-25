@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import "./App.css";
 import IProduct from "./interfaces/IProduct";
 import ProductList from "./components/Product/ProductList";
-import { Route , Routes } from "react-router-dom";
+import { Route , Routes, useSearchParams } from "react-router-dom";
 import ProductAdd from "./components/Product/ProductAdd";
 import ProductEdit from "./components/Product/ProductEdit";
 import UserList from "./components/User/UserList";
@@ -10,10 +10,37 @@ import IUser from "./interfaces/IUser";
 import UserAdd from "./components/User/UserAdd";
 import Count from "./components/Count";
 
+const SET_PRODUCT = "set_product";
+const ADD_PRODUCT ="add_product";
+const UPDATE_PRODUCT ="update_product";
+const DELETE_PRODUCT = "delete_product";
+
+function reducerProduct(state: any, action: any){
+  switch(action.type){
+    case SET_PRODUCT:
+      return action.payload;
+    case ADD_PRODUCT:
+      return [...state, action.payload];
+    case DELETE_PRODUCT:
+      return state.filter((item: IProduct) => item.id !== action.payload);
+    case UPDATE_PRODUCT:
+      return state.map((item: IProduct)=> {
+        if(item.id == action.payload.id)
+          return action.payload;
+        else{
+          return item;
+        }
+      })
+    default: 
+      return state;
+  }
+}
 
 function App() {
-  const [product,setProduct] = useState<IProduct[]>([])
+  // const [product,setProduct] = useState<IProduct[]>([])
   const [userList,setUserList]= useState<IUser[]>([])
+
+  const [product,dispatchProduct] = useReducer(reducerProduct,[] as IProduct[])
 
   useEffect(()=>{
     // product
@@ -23,7 +50,8 @@ function App() {
       })
       .then(data=>{
         // console.log(data);
-        setProduct(data)
+        // setProduct(data)
+        dispatchProduct({type: SET_PRODUCT, payload: data})
       })
     // user
     fetch(`http://localhost:3000/users`)
@@ -47,7 +75,8 @@ function App() {
     .then(()=>{
         //xóa sản phẩm có id trong mảng product
         //sử dụng setProduct để gán lại giá trị mới cho product và render lại giao diện
-        setProduct(product.filter((item)=> item.id != id ));
+        // setProduct(product.filter((item)=> item.id != id ));
+        dispatchProduct({type: DELETE_PRODUCT,payload: id})
     })
     .catch(()=>{
       console.log("có lỗi khi xóa");
@@ -72,7 +101,8 @@ function App() {
     })
     .then((newData)=>{
       // thêm product mới vào cuối mảng
-      setProduct([...product,newData])
+      // setProduct([...product,newData])
+      dispatchProduct({type: ADD_PRODUCT,payload: newData})
     })
     .catch(()=>{
       console.log("có lỗi");
@@ -94,12 +124,13 @@ function App() {
       return data.json();
     })
     .then(data=>{
-      setProduct(product.map((item)=>{
-        if(item.id == id)
-          return data;
-        else
-          return item;
-      }))
+      // setProduct(product.map((item)=>{
+      //   if(item.id == id)
+      //     return data;
+      //   else
+      //     return item;
+      // }))
+      dispatchProduct({type: UPDATE_PRODUCT, payload: data})
     })
     .catch(()=>{
       console.log("lỗi khi sửa dữ liệu");
