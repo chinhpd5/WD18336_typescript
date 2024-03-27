@@ -1,30 +1,9 @@
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import IProduct from "../interfaces/IProduct";
 import ProductList from "./Product/ProductList";
+import { CountContext } from "../context/CountProvider";
 
-function reducer(state:any,action:any){
-    console.log("action: ",action);
-    console.log("state trước: ",state);
-    
-    switch(action){
-        case "ADD":
-            state = state + 1
-            break;
-            //return state + 1
-        case "DELETE":
-            state = state -1;
-            break;
-            //return state - 1
-        case "RESET":
-            state = 0
-            break;
-            //return 0
-        default: 
-            return state;
-    }
-    console.log("state sau:",state);
-    return state;
-}
+
 function reducer2(state:any, action:any){
     console.log(action);
     switch(action.type){
@@ -62,8 +41,11 @@ function reducerProduct(state:any, action: any){
 }
 
 function Count(){
+    const {count,dispatch} = useContext(CountContext)
+
     // const [count,setCount] = useState(0);
-    const [count,dispatch] = useReducer(reducer,0)
+
+    // const [count,dispatch] = useReducer(reducer,0)
     const [count2,dispatch2] = useReducer(reducer2,0)
     const [product,dispatchProduct] = useReducer(reducerProduct,initProduct);
     //b1 tạo reducer

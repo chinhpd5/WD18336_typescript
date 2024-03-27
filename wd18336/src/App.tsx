@@ -16,13 +16,15 @@ const UPDATE_PRODUCT ="update_product";
 const DELETE_PRODUCT = "delete_product";
 
 function reducerProduct(state: any, action: any){
+  console.log(state);
+  
   switch(action.type){
     case SET_PRODUCT:
       return action.payload;
     case ADD_PRODUCT:
       return [...state, action.payload];
     case DELETE_PRODUCT:
-      return state.filter((item: IProduct) => item.id !== action.payload);
+      return state.filter((item: IProduct)=>{ return item.id != action.payload });
     case UPDATE_PRODUCT:
       return state.map((item: IProduct)=> {
         if(item.id == action.payload.id)
