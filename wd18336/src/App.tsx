@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import "./App.css";
 import IProduct from "./interfaces/IProduct";
 import ProductList from "./components/Product/ProductList";
@@ -9,6 +9,7 @@ import UserList from "./components/User/UserList";
 import IUser from "./interfaces/IUser";
 import UserAdd from "./components/User/UserAdd";
 import Count from "./components/Count";
+import { ProductContext } from "./context/ProductProvider";
 
 const SET_PRODUCT = "set_product";
 const ADD_PRODUCT ="add_product";
@@ -39,22 +40,12 @@ function reducerProduct(state: any, action: any){
 }
 
 function App() {
-  // const [product,setProduct] = useState<IProduct[]>([])
   const [userList,setUserList]= useState<IUser[]>([])
 
-  const [product,dispatchProduct] = useReducer(reducerProduct,[] as IProduct[])
+  const {product,dispatchProduct} = useContext(ProductContext);
 
   useEffect(()=>{
-    // product
-    fetch(`http://localhost:3000/product`)
-      .then(data=>{
-        return data.json();
-      })
-      .then(data=>{
-        // console.log(data);
-        // setProduct(data)
-        dispatchProduct({type: SET_PRODUCT, payload: data})
-      })
+   
     // user
     fetch(`http://localhost:3000/users`)
       .then(res=>res.json())
@@ -173,7 +164,7 @@ function App() {
       
       <Route path="product">
           {/* url: product */}
-          <Route path="" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
+          <Route path="" element={<ProductList/>} />
           {/* url: product/add */}
           <Route path="add" element={<ProductAdd onAdd={handleAdd}/>} />
           {/* url: product/edit/:id */}

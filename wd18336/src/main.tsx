@@ -5,11 +5,15 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CountProvider } from './context/CountProvider.tsx';
+import { ProductProvider } from './context/ProductProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <CountProvider>
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
-  </CountProvider>
+  <ProductProvider>
+    <CountProvider>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </CountProvider>
+  </ProductProvider>
+ 
 )

@@ -1,25 +1,43 @@
 import { Link } from "react-router-dom";
 import IProduct from "../../interfaces/IProduct";
+import { useContext } from "react";
+import { DELETE_PRODUCT, ProductContext } from "../../context/ProductProvider";
 
 type productType={
-  listProduct: IProduct[],
-  onDelete: (id: string) => void
+  
 }
 
 
 function ProductList(prop: productType){
   // console.log(prop);
-  
+    const {product,dispatchProduct} = useContext(ProductContext);
+
+    function handleDelete(id: string){
+      fetch(`http://localhost:3000/product/${id}`,{
+        method:"DELETE",
+        headers:{
+          'Content-Type':'application/json'
+        }
+      })
+      .then(()=>{
+          dispatchProduct({type: DELETE_PRODUCT,payload: id})
+      })
+      .catch(()=>{
+        console.log("có lỗi khi xóa");
+        
+      })
+    }
+
     return (
       <>
         <Link to={"/product/add"} >Thêm sản phẩm</Link>
         <ul>
-          {prop.listProduct.map(product=>{
+          {product.map((item:IProduct)=>{
                   return (
-                      <li key={product.id} >
-                        {product.name} - {product.price}
-                        <Link className="btn btn-warning mx-3" to={`/product/edit/${product.id}`}>Sửa</Link>
-                        <button className="btn btn-danger" onClick={()=>{ prop.onDelete(product.id!) }} >Xóa</button>
+                      <li key={item.id} >
+                        {item.name} - {item.price}
+                        <Link className="btn btn-warning mx-3" to={`/product/edit/${item.id}`}>Sửa</Link>
+                        <button className="btn btn-danger" onClick={()=>{ handleDelete(item.id!) }} >Xóa</button>
                       </li>
                   )
           })}

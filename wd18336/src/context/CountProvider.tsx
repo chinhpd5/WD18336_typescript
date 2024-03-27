@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useReducer } from "react";
 
 type Prop={
-    children: any
+    children: ReactNode
 }
 
 export const CountContext = createContext({} as {count:number,dispatch:any });
