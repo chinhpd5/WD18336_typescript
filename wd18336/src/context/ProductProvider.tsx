@@ -32,24 +32,11 @@ function reducerProduct(state:any, action:any){
   }
 }
 
-
 export const ProductContext = createContext({} as {product: any,dispatchProduct:any});
 
 
 export function ProductProvider(prop: Prop){
     const [product,dispatchProduct] = useReducer(reducerProduct,[] as IProduct[])
-
-    useEffect(()=>{
-        fetch(`http://localhost:3000/product`)
-          .then(data=>{
-            return data.json();
-          })
-          .then(data=>{
-            dispatchProduct({type: SET_PRODUCT, payload: data})
-          })
-    
-      },[])
-
 
     return(
         <ProductContext.Provider value={{product,dispatchProduct}}>

@@ -9,40 +9,9 @@ import UserList from "./components/User/UserList";
 import IUser from "./interfaces/IUser";
 import UserAdd from "./components/User/UserAdd";
 import Count from "./components/Count";
-import { ProductContext } from "./context/ProductProvider";
-
-const SET_PRODUCT = "set_product";
-const ADD_PRODUCT ="add_product";
-const UPDATE_PRODUCT ="update_product";
-const DELETE_PRODUCT = "delete_product";
-
-function reducerProduct(state: any, action: any){
-  console.log(state);
-  
-  switch(action.type){
-    case SET_PRODUCT:
-      return action.payload;
-    case ADD_PRODUCT:
-      return [...state, action.payload];
-    case DELETE_PRODUCT:
-      return state.filter((item: IProduct)=>{ return item.id != action.payload });
-    case UPDATE_PRODUCT:
-      return state.map((item: IProduct)=> {
-        if(item.id == action.payload.id)
-          return action.payload;
-        else{
-          return item;
-        }
-      })
-    default: 
-      return state;
-  }
-}
 
 function App() {
   const [userList,setUserList]= useState<IUser[]>([])
-
-  const {product,dispatchProduct} = useContext(ProductContext);
 
   useEffect(()=>{
    
@@ -55,83 +24,6 @@ function App() {
       })
 
   },[])
-
-  function handleDelete(id: string){
-    //call api xóa trong json server
-    // console.log("nhận: ", id);
-    fetch(`http://localhost:3000/product/${id}`,{
-      method:"DELETE",
-      headers:{
-        'Content-Type':'application/json'
-      }
-    })
-    .then(()=>{
-        //xóa sản phẩm có id trong mảng product
-        //sử dụng setProduct để gán lại giá trị mới cho product và render lại giao diện
-        // setProduct(product.filter((item)=> item.id != id ));
-        dispatchProduct({type: DELETE_PRODUCT,payload: id})
-    })
-    .catch(()=>{
-      console.log("có lỗi khi xóa");
-      
-    })
-    
-  }
-
-  //call API thêm mới sản phẩm
-  function handleAdd(data: IProduct){
-    // data là dữ liệu nhận được khi form submit gửi từ ProductAdd
-    fetch(`http://localhost:3000/product/`,{
-      method: 'POST', 
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(res=>{
-      // res là dữ liệu sản phẩm nhận lại sau khi thêm thành công (có id của sản phẩm)
-      return res.json();
-    })
-    .then((newData)=>{
-      // thêm product mới vào cuối mảng
-      // setProduct([...product,newData])
-      dispatchProduct({type: ADD_PRODUCT,payload: newData})
-    })
-    .catch(()=>{
-      console.log("có lỗi");
-      
-    })
-    
-  }
-
-  function handleUpdate(id: string, data: IProduct){
-    // console.log({id, data});
-    fetch(`http://localhost:3000/product/${id}`,{
-      method: "PUT",
-      headers: {
-        "Content-Type" : "Application/json"
-      },
-      body: JSON.stringify(data)
-    })
-    .then(data=>{
-      return data.json();
-    })
-    .then(data=>{
-      // setProduct(product.map((item)=>{
-      //   if(item.id == id)
-      //     return data;
-      //   else
-      //     return item;
-      // }))
-      dispatchProduct({type: UPDATE_PRODUCT, payload: data})
-    })
-    .catch(()=>{
-      console.log("lỗi khi sửa dữ liệu");
-      
-    })
-  }
-
-  //User
 
   function handleDeleteUser(id: string){
     
@@ -166,9 +58,9 @@ function App() {
           {/* url: product */}
           <Route path="" element={<ProductList/>} />
           {/* url: product/add */}
-          <Route path="add" element={<ProductAdd onAdd={handleAdd}/>} />
+          <Route path="add" element={<ProductAdd/>} />
           {/* url: product/edit/:id */}
-          <Route path="edit/:id" element={<ProductEdit onEdit={handleUpdate} />} />
+          <Route path="edit/:id" element={<ProductEdit />} />
       </Route>
 
       <Route path="user" >
