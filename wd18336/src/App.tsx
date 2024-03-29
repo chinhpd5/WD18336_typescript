@@ -9,6 +9,8 @@ import UserList from "./components/User/UserList";
 import IUser from "./interfaces/IUser";
 import UserAdd from "./components/User/UserAdd";
 import Count from "./components/Count";
+import WebsiteLayout from "./pages/layout/WebsiteLayout";
+import AdminLayout from "./pages/layout/AdminLayout";
 
 function App() {
   const [userList,setUserList]= useState<IUser[]>([])
@@ -24,11 +26,8 @@ function App() {
       })
 
   },[])
-
   function handleDeleteUser(id: string){
-    
   }
-
   function handleAddUser(data: IUser){
       if(data){
         fetch('http://localhost:3000/users',{
@@ -52,26 +51,30 @@ function App() {
   //npm i react-router-dom
   return (
     <Routes>
-      <Route path="/" element={ <h1>Trang chủ</h1> }/>
-      
-      <Route path="product">
-          {/* url: product */}
-          <Route path="" element={<ProductList/>} />
-          {/* url: product/add */}
-          <Route path="add" element={<ProductAdd/>} />
-          {/* url: product/edit/:id */}
-          <Route path="edit/:id" element={<ProductEdit />} />
+      <Route path="" element={<WebsiteLayout/>}>
+        <Route path="/" element={ <h1>Trang chủ</h1> }/>
+        <Route path="product" element={ <h1>Sản phẩm</h1> }/>
+        <Route path="contact" element={ <h1>Liên hệ</h1> }/>
+        <Route path="cart" element={ <h1>Giỏ hàng</h1> }/>
       </Route>
 
-      <Route path="user" >
-        <Route path="" element={<UserList data={userList} onDelete={handleDeleteUser} />} />
-        <Route path="add" element={<UserAdd onAdd={handleAddUser}/>} />
-      </Route>
-      <Route path="count" element={<Count/>} />
+      <Route path="admin" element={<AdminLayout/>}>
+        <Route path="product">
+            {/* url: product */}
+            <Route path="" element={<ProductList/>} />
+            {/* url: product/add */}
+            <Route path="add" element={<ProductAdd/>} />
+            {/* url: product/edit/:id */}
+            <Route path="edit/:id" element={<ProductEdit />} />
+        </Route>
 
-      {/* <Route path="/product" element={<ProductList listProduct={product} onDelete={handleDelete}/>} />
-      <Route path="product/add" element={<ProductAdd onAdd={handleAdd}/>} />
-      <Route path="product/edit/:id" element={<ProductEdit onEdit={handleUpdate} />}/> */}
+        <Route path="user" >
+          <Route path="" element={<UserList data={userList} onDelete={handleDeleteUser} />} />
+          <Route path="add" element={<UserAdd onAdd={handleAddUser}/>} />
+        </Route>
+        <Route path="count" element={<Count/>} />
+      </Route>
+
     </Routes>
   )
 }
