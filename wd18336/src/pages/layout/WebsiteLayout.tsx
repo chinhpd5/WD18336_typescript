@@ -24,10 +24,10 @@ function WebsiteLayout(){
 
                         <ul className="navbar-nav me-3">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/">Đăng kí</Link>
+                                <Link className="nav-link active" aria-current="page" to="/signup">Đăng kí</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/">Đăng nhập</Link>
+                                <Link className="nav-link active" aria-current="page" to="/signin">Đăng nhập</Link>
                             </li>
                         </ul>
                     </div>

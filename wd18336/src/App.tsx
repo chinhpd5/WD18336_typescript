@@ -11,6 +11,8 @@ import UserAdd from "./components/User/UserAdd";
 import Count from "./components/Count";
 import WebsiteLayout from "./pages/layout/WebsiteLayout";
 import AdminLayout from "./pages/layout/AdminLayout";
+import Regiter from "./pages/register";
+import Signin from "./pages/signin";
 
 function App() {
   const [userList,setUserList]= useState<IUser[]>([])
@@ -52,6 +54,11 @@ function App() {
   return (
     <Routes>
       <Route path="" element={<WebsiteLayout/>}>
+        {/* đăng kí */}
+        <Route path="signup" element={<Regiter/>} />
+        {/* đăng nhập */}
+        <Route path="signin" element={<Signin/>} />
+
         <Route path="/" element={ <h1>Trang chủ</h1> }/>
         <Route path="product" element={ <h1>Sản phẩm</h1> }/>
         <Route path="contact" element={ <h1>Liên hệ</h1> }/>
