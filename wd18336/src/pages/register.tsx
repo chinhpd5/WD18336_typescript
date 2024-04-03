@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 type Input ={
     name: string,
@@ -9,6 +9,7 @@ type Input ={
 }
 
 function Regiter(){
+    const navigate = useNavigate();
 
     const {
         register,
@@ -18,7 +19,35 @@ function Regiter(){
     }= useForm<Input>();
 
     function onSubmit(data: Input){
+        // console.log(data);
+        const {name, password,email} = data;
+        // console.log({name, password,email});
 
+        fetch('http://localhost:3000/register',{
+            method: "POST",
+            headers:{
+                'Content-Type' : 'Application/json'
+            },
+            body: JSON.stringify({name, password,email})
+        })
+            .then(async(resData)=>{
+                console.log(resData);
+                if(resData.ok){
+                    // nếu thành công chuyển đến trang đăng nhập
+                    navigate('/signin')
+                }else{
+                    const message = await resData.json();
+                    return new Promise((resolve,reject)=>{
+                        reject(message)
+                    })
+                }
+            })
+            .catch(error=>{
+                alert("lỗi: "+ error)
+            })
+        
+
+        
     }
 
     return(

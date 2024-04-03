@@ -66,6 +66,18 @@
       "age": 28,
       "gender": "female",
       "email": "Karik@sohu.com"
+    },
+    {
+      "email": "chinhpd5@fe.edu.vn",
+      "password": "$2a$10$g7fMmzClx/FlKWtxx.6cieyGailF10lHi.Pb.eXEyofJLd.Cg7nXK",
+      "name": "chinhpd5",
+      "id": "sDsFBGs"
+    },
+    {
+      "email": "chinhpd6@fe.edu.vn",
+      "password": "$2a$10$IITgKU8pmFzlsbVoo3HKhutnuvKS4jiq7OUgMxlZGairlbVF748Xy",
+      "name": "chinhpd6",
+      "id": "MEN7LqW"
     }
   ],
   "books": [
